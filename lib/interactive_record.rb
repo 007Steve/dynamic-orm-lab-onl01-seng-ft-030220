@@ -3,4 +3,18 @@ require 'active_support/inflector'
 
 class InteractiveRecord
   
+  def self.table_name
+    self.to_s.downcase.pluralize
+  end
+  
+  def self.column_names
+    DB[:conn].execute.results_as_hash = true
+    
+    
+  end
+  
+  def initialize(option={})
+    
+    option.each {|p, v| self.send("#{p}",v) }
+  end
 end
